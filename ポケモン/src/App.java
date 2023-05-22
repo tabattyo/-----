@@ -471,7 +471,7 @@ public class App {
         if(0<=escape &&escape<=2){
             return true;
         }else{
-            System.out.println(""+player.name+"は逃げられなかった..");
+            System.out.println(""+player.name+"は逃げられなかった..");//aaaani
             return false;   
         }
     }
