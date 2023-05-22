@@ -25,7 +25,7 @@ public class App {
         ArrayList<String> musasi_move_list;//ArrayList型でstring型の要素を持つことが出来る配列
         //protected String str_move1=String.join(",",move1);
         ArrayList<Integer> musasi_move_power_lsit;
-        int musasi_speed=100;
+        int musasi_speed=140;
         musasi_move_list = new ArrayList<>();
         musasi_move_power_lsit = new ArrayList<>();
         musasi_move_list.add("1:からさ4しょうゆ");
@@ -36,11 +36,31 @@ public class App {
         musasi_move_power_lsit.add(70);
         musasi_move_power_lsit.add(150);
         musasi_move_power_lsit.add(60);
+
+        ArrayList<String> saunaa_move_list;//ArrayList型でstring型の要素を持つことが出来る配列
+        //protected String str_move1=String.join(",",move1);
+        ArrayList<Integer> saunaa_move_power_lsit;
+        int saunaa_speed=70;
+        saunaa_move_list = new ArrayList<>();
+        saunaa_move_power_lsit = new ArrayList<>();
+        saunaa_move_list.add("1:アウフグース");
+        saunaa_move_list.add("2:セルフロウリュ");
+        saunaa_move_list.add("3:羽衣をまとう");
+        saunaa_move_list.add("4:オロポ補給");
+        saunaa_move_power_lsit.add(80);
+        saunaa_move_power_lsit.add(70);
+        saunaa_move_power_lsit.add(150);
+        saunaa_move_power_lsit.add(60);
         Player player = new Player(320,"バータ",bata_move_list,bata_move_power_lsit,bata_speed);
         Player hikae =new Player(350,"武蔵坊主",musasi_move_list,musasi_move_power_lsit,musasi_speed);
-        
+        Player hikae2=new Player(400, "サウナー", saunaa_move_list, saunaa_move_power_lsit, saunaa_speed);
 
-        
+        ArrayList<Player> fellow_list;
+        fellow_list= new ArrayList<>();
+        //fellow_list.add(player);
+        fellow_list.add(hikae);
+        fellow_list.add(hikae2);
+
         Pokemon enemy = null;
         int same_speed;//同速
         int speed=0;
@@ -181,12 +201,18 @@ public class App {
                     } 
                 }else if(battle_command==4){//交代コマンドの場合
                     System.out.println("どのポケモンに交代しますか？");
-                    System.out.println("戻れ！"+player.name+"!");
-                    System.out.println("ででこい！"+hikae.name+"!");
+                    choice_pokemon(fellow_list);
+                    String input_text3 = scanner.nextLine();//どのコマンドか選ぶ
+                    int choice_fellow_command=Integer.parseInt(input_text3);
+                    choice_fellow_command=choice_fellow_command-1;
 
+                    System.out.println("戻れ！"+player.name+"!");
+                    System.out.println("ででこい！"+fellow_list.get(choice_fellow_command).name+"!");
+                    
                     Player tmp=player;
-                    player=hikae;
-                    hikae=tmp;
+                    player=fellow_list.get(choice_fellow_command);
+                    fellow_list.set(choice_fellow_command,tmp);
+
                     result=enemy.attack(player);
                     if (result == 0) {//模試敵が死んだら
                         break;
@@ -295,10 +321,18 @@ public class App {
         
     }
 
-    static public void choice(ArrayList<String>choice){//選択肢の中から選ぶ関数
+    static public void choice(ArrayList<String> choice){//選択肢の中から選ぶ関数
         for(int i=0;i<choice.size();i++){
             int num=i+1;
             System.out.println(""+num+":"+choice.get(i));
+        }
+    }
+
+    
+    static public void choice_pokemon(ArrayList<Player> choice){//選択肢の中から選ぶ関数
+        for(int i=0;i<choice.size();i++){
+            int num=i+1;
+            System.out.println(""+num+":"+choice.get(i).name);
         }
     }
     static public void recover(Pokemon player){//回復関数
