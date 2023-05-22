@@ -466,7 +466,7 @@ public class App {
     }
     static public boolean escape(Pokemon player){ //逃げる関数
         final Random RAN = new Random();
-        int escape;//逃げ
+        int escape;//逃げeeeeeeeeeeeee
         escape = RAN.nextInt(7);
         if(0<=escape &&escape<=2){
             return true;
