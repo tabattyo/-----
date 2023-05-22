@@ -464,7 +464,7 @@ public class App {
         }
         
     }
-    static public boolean escape(Pokemon player){ //逃げる関数
+    static public boolean escape(Pokemon player){ //逃げる関数ひえひえ
         final Random RAN = new Random();
         int escape;//逃げeeeeeeeeeeeee
         escape = RAN.nextInt(7);
